@@ -1,0 +1,65 @@
+A51 MACRO ASSEMBLER  P1                                                                   09/22/2022 08:36:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\p1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE p1.a51 SET(SMALL) DEBUG PRINT(.\Listings\p1.lst) OBJECT(.\Objects\p1.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H 
+0000 C290              2                     CLR P1.0 
+0002 D291              3                     SETB P1.1 
+0004 D292              4                     SETB P1.2 
+0006 D293              5                     SETB P1.3 
+0008 902000            6                     MOV DPTR, #2000H 
+000B 7920              7                     MOV R1, #20H 
+000D 7800              8     OUTER:  MOV R0, #00H 
+000F 7455              9     INNER:  MOV A, #55H 
+0011 F0               10             MOVX @DPTR, A 
+0012 A3               11             INC DPTR 
+0013 D8FA             12             DJNZ R0, INNER 
+0015 D9F6             13             DJNZ R1, OUTER 
+                      14       
+0017 902000           15             MOV DPTR, #2000H 
+001A 7920             16             MOV R1, #20H 
+001C 7800             17     OUTER2: MOV R0, #00H 
+001E E0               18     INNER2: MOVX A, @DPTR 
+001F B4550B           19             CJNE A, #55H, ERROR 
+0022 A3               20                 INC DPTR 
+0023 D8F9             21                     DJNZ R0, INNER2 
+0025 D9F5             22                     DJNZ R1, OUTER2 
+                      23       
+0027 D290             24                     SETB P1.0 
+0029 C291             25                     CLR P1.1 
+002B 80FE             26     WAIT:   SJMP WAIT 
+002D                  27     ERROR:  
+002D D290             28                     SETB P1.0 
+002F D291             29                     SETB P1.1 
+0031 C292             30                     CLR P1.2 
+0033 D293             31                     SETB P1.3 
+0035 80FE             32     WAIT2: SJMP WAIT2 
+                      33     END
+A51 MACRO ASSEMBLER  P1                                                                   09/22/2022 08:36:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ERROR. . . . . . .  C ADDR   002DH   A   
+INNER. . . . . . .  C ADDR   000FH   A   
+INNER2 . . . . . .  C ADDR   001EH   A   
+OUTER. . . . . . .  C ADDR   000DH   A   
+OUTER2 . . . . . .  C ADDR   001CH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+WAIT . . . . . . .  C ADDR   002BH   A   
+WAIT2. . . . . . .  C ADDR   0035H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
